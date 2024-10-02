@@ -11,6 +11,11 @@
     <div class="container text-center mt-5">
         <h1>API de Cerraduras de Kleene y Positiva</h1>
         
+        <!-- Mostrar el mensaje de error si existe -->
+        <div class="mt-4">
+            <p style="color: red; font-weight: bold;">[[${error}]]</p>
+        </div>
+
         <!-- Formulario para ingresar el número -->
         <form action="/getCerraduras" method="get" class="mt-4">
             <div class="mb-3">
@@ -20,9 +25,10 @@
             <button type="submit" class="btn btn-primary">Obtener Cerraduras</button>
         </form>
 
-        <!-- Mostrar los resultados si existen -->
+        <!-- Mostrar el número que se utilizó para el cálculo -->
         <div class="mt-5">
-            <h3>Resultados:</h3>
+            <h3>Resultados para n = [[${number}]]:</h3>
+
             <p><strong>Cerradura Estrella (Σ^*):</strong> [[${kleeneStar != null ? kleeneStar['Σ^*'] : 'No disponible'}]]</p>
             <p><strong>Cerradura Positiva (Σ^+):</strong> [[${kleenePlus != null ? kleenePlus['Σ^+'] : 'No disponible'}]]</p>
         </div>

@@ -13,18 +13,23 @@ public class WebController {
     @Autowired
     private ClosureService closureService;
 
-    // Método para mostrar el formulario al entrar a la página
+    // Mostrar el formulario inicial
     @GetMapping("/")
     public String index() {
-        return "index";  // Muestra la vista index.html sin resultados al inicio
+        return "index";  // Mostrar el formulario vacío inicialmente
     }
 
-    // Método para procesar el número enviado por el formulario y mostrar los resultados
+    // Procesar el número ingresado
     @GetMapping("/getCerraduras")
     public String getCerraduras(@RequestParam("number") int number, Model model) {
+        if (number <= 0) {
+            model.addAttribute("error", "El número debe ser mayor que 0.");
+            return "index";  // Volver al formulario con el mensaje de error
+        }
+
         model.addAttribute("kleeneStar", closureService.generatekleeneStar(number));
         model.addAttribute("kleenePlus", closureService.generatekleenePlus(number));
         model.addAttribute("number", number);
-        return "index";  // Vuelve a la vista index con los resultados generados
+        return "index";  // Volver a la vista con los resultados
     }
 }
