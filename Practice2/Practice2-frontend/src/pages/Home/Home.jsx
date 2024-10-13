@@ -1,5 +1,6 @@
 import Layout from "../../components/Layout";
-import { useLoaderData } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
+import Button from "../../components/Button/index.js";
 
 export default function Home() {
   const users = useLoaderData();
@@ -15,9 +16,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <button className="bg-indigo-600 text-white rounded-md py-2 px-3 text-sm font-semibold">
-              Nuevo usuario
-            </button>
+            <Button>Nuevo usuario</Button>
           </div>
         </section>
         <section className="mt-10 overflow-x-auto">
@@ -57,13 +56,8 @@ export default function Home() {
                       <td className="py-4 px-3">{last_name}</td>
                       <td className="py-4 px-3">{email}</td>
                       <td className="py-4 px-3">{rol}</td>
-                      <td
-                        className="py-4 px-3 text-indigo-600 font-semibold"
-                        style={{
-                          fontWeight: 500,
-                        }}
-                      >
-                        <a href={`/user/${id_user}`}>Editar</a>
+                      <td className="py-4 px-3 text-indigo-600 font-semibold">
+                        <NavLink to={`/user/${id_user}`}>Editar</NavLink>
                       </td>
                     </tr>
                   ),
