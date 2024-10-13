@@ -1,17 +1,14 @@
-import { Form, NavLink, useActionData } from "react-router-dom";
-import { genders, roles } from "./User.constants.js";
-import Button from "../../components/Button";
-import Label from "../../components/Label";
-import Input from "../../components/Input";
-import Select from "../../components/Select";
-import FormItem from "../../components/FormItem";
+import { NavLink } from "react-router-dom";
+import FormItem from "../FormItem/index.js";
+import Input from "../Input/index.js";
+import Select from "../Select/index.js";
+import Label from "../Label/index.js";
 import PropTypes from "prop-types";
+import { genders, roles } from "../../pages/User/User.constants.js";
 
-export default function UserForm({ user }) {
-  const errors = useActionData();
-
+export default function UserForm({ children, user }) {
   return (
-    <Form action={`/user/${user.id_user}`} method="PUT" className="mt-10">
+    <>
       <FormItem>
         <Label
           htmlFor="user_u"
@@ -23,7 +20,7 @@ export default function UserForm({ user }) {
           id="user_u"
           name="user_u"
           type="text"
-          defaultValue={user.user_u}
+          defaultValue={user?.user_u}
           required
         />
       </FormItem>
@@ -38,7 +35,7 @@ export default function UserForm({ user }) {
           id="user_name"
           name="user_name"
           type="text"
-          defaultValue={user.user_name}
+          defaultValue={user?.user_name}
           required
         />
       </FormItem>
@@ -48,7 +45,7 @@ export default function UserForm({ user }) {
           id="last_name"
           name="last_name"
           type="text"
-          defaultValue={user.last_name}
+          defaultValue={user?.last_name}
         />
       </FormItem>
       <FormItem>
@@ -62,17 +59,17 @@ export default function UserForm({ user }) {
           id="email"
           name="email"
           type="email"
-          defaultValue={user.email}
+          defaultValue={user?.email}
           required
         />
       </FormItem>
-      {user.rol && (
+      {user?.rol && (
         <FormItem>
           <Label htmlFor="rol">Rol</Label>
           <Select
             id="rol"
             name="rol"
-            defaultValue={roles.includes(user.rol) ? user.rol : ""}
+            defaultValue={roles.includes(user?.rol) ? user?.rol : ""}
           >
             <option value="" disabled>
               Elige una opción
@@ -87,14 +84,14 @@ export default function UserForm({ user }) {
       )}
       <FormItem>
         <Label htmlFor="age">Edad</Label>
-        <Input id="age" name="age" type="number" defaultValue={user.age} />
+        <Input id="age" name="age" type="number" defaultValue={user?.age} />
       </FormItem>
       <FormItem>
         <Label htmlFor="gender">Género</Label>
         <Select
           id="gender"
           name="gender"
-          defaultValue={genders.includes(user.gender) ? user.gender : ""}
+          defaultValue={genders.includes(user?.gender) ? user?.gender : ""}
         >
           <option value="" disabled>
             Elige una opción
@@ -110,15 +107,14 @@ export default function UserForm({ user }) {
         <NavLink to="/" className="text-sm font-semibold">
           Cancelar
         </NavLink>
-        <Button name="intent" value="update">
-          Guardar
-        </Button>
+        {children}
       </div>
-    </Form>
+    </>
   );
 }
 
 UserForm.propTypes = {
+  children: PropTypes.node.isRequired,
   user: PropTypes.shape({
     id_user: PropTypes.number.isRequired,
     user_u: PropTypes.string.isRequired,

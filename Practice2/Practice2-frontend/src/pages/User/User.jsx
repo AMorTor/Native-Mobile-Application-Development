@@ -1,7 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import Layout from "../../components/Layout/index.js";
 import UserDeleteDialog from "./UserDeleteDialog.jsx";
-import UserForm from "./UserForm.jsx";
+import UserUpdateForm from "./UserUpdateForm.jsx";
 
 export default function User() {
   const user = useLoaderData();
@@ -18,7 +18,7 @@ export default function User() {
         </div>
         <UserDeleteDialog userID={user.id_user} />
       </section>
-      <UserForm user={user} />
+      <UserUpdateForm user={user} />
     </Layout>
   );
 }

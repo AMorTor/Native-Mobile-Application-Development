@@ -16,7 +16,7 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <NavLink to="/create-user">
+            <NavLink to="/user">
               <Button type="button">Nuevo usuario</Button>
             </NavLink>
           </div>
