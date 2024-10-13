@@ -1,17 +1,17 @@
-import { Form, NavLink, useLoaderData } from "react-router-dom";
+import { Form, NavLink, useActionData } from "react-router-dom";
 import { genders, roles } from "./User.constants.js";
 import Button from "../../components/Button";
 import Label from "../../components/Label";
 import Input from "../../components/Input";
 import Select from "../../components/Select";
 import FormItem from "../../components/FormItem";
+import PropTypes from "prop-types";
 
-export default function UserForm() {
-  const user = useLoaderData();
-  // const errors = useActionData();
+export default function UserForm({ user }) {
+  const errors = useActionData();
 
   return (
-    <Form action="/user" className="mt-10">
+    <Form action={`/user/${user.id_user}`} method="PUT" className="mt-10">
       <FormItem>
         <Label
           htmlFor="user_u"
@@ -110,8 +110,23 @@ export default function UserForm() {
         <NavLink to="/" className="text-sm font-semibold">
           Cancelar
         </NavLink>
-        <Button>Guardar</Button>
+        <Button name="intent" value="update">
+          Guardar
+        </Button>
       </div>
     </Form>
   );
 }
+
+UserForm.propTypes = {
+  user: PropTypes.shape({
+    id_user: PropTypes.number.isRequired,
+    user_u: PropTypes.string.isRequired,
+    user_name: PropTypes.string.isRequired,
+    last_name: PropTypes.string,
+    email: PropTypes.string.isRequired,
+    rol: PropTypes.string,
+    age: PropTypes.number,
+    gender: PropTypes.string,
+  }),
+};

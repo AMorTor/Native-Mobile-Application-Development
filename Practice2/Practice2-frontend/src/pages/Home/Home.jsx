@@ -16,11 +16,17 @@ export default function Home() {
             </p>
           </div>
           <div>
-            <Button>Nuevo usuario</Button>
+            <NavLink to="/create-user">
+              <Button type="button">Nuevo usuario</Button>
+            </NavLink>
           </div>
         </section>
         <section className="mt-10 overflow-x-auto">
-          {users.length === 0 && <p className="text-center">No hay usuarios</p>}
+          {users.length === 0 && (
+            <p className="text-center text-sm font-medium">
+              -- No hay usuarios --
+            </p>
+          )}
           {users.length > 0 && (
             <table className="text-sm w-full">
               <thead className="text-left border-b border-gray-300">
