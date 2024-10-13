@@ -17,6 +17,7 @@ async function userAction({ params, request }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        id_user: id,
         user_u,
         email,
         user_name,
