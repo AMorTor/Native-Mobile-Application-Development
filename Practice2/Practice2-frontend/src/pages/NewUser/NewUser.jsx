@@ -1,11 +1,10 @@
 import { Form } from "react-router-dom";
-import Layout from "../../components/Layout/index.js";
 import UserForm from "../../components/UserForm";
 import Button from "../../components/Button/index.js";
 
 export default function NewUser() {
   return (
-    <Layout>
+    <>
       <section className="flex gap-6 flex-col md:flex-row justify-between md:items-center">
         <div>
           <h1 className="font-semibold text-gray-900">Nuevo perfil</h1>
@@ -20,6 +19,6 @@ export default function NewUser() {
           <Button>Guardar</Button>
         </UserForm>
       </Form>
-    </Layout>
+    </>
   );
 }

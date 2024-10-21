@@ -1,8 +1,15 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import * as Popover from "@radix-ui/react-popover";
 
 export default function Profile() {
-  const id = 1;
+  const id = localStorage.getItem("userId");
+  const navigate = useNavigate();
+
+  function handleSignOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    navigate("/signin");
+  }
 
   return (
     <Popover.Root>
@@ -38,7 +45,10 @@ export default function Profile() {
               </NavLink>
             </li>
             <li>
-              <button className="w-full text-left hover:bg-gray-100 py-2 px-4 text-red-500">
+              <button
+                className="w-full text-left hover:bg-gray-100 py-2 px-4 text-red-500"
+                onClick={handleSignOut}
+              >
                 Cerrar sesión
               </button>
             </li>

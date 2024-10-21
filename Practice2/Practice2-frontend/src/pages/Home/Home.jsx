@@ -1,4 +1,3 @@
-import Layout from "../../components/Layout";
 import { NavLink, useLoaderData } from "react-router-dom";
 import Button from "../../components/Button/index.js";
 
@@ -6,7 +5,7 @@ export default function Home() {
   const users = useLoaderData();
 
   return (
-    <Layout>
+    <>
       <main>
         <section className="flex gap-6 flex-col md:flex-row justify-between md:items-center">
           <div>
@@ -73,6 +72,6 @@ export default function Home() {
           )}
         </section>
       </main>
-    </Layout>
+    </>
   );
 }
