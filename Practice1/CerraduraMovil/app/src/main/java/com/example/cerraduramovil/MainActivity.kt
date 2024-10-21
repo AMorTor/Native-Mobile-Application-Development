@@ -41,7 +41,7 @@ class MainActivity : ComponentActivity() {
 
             // Usar corutina para realizar la llamada de red de forma asíncrona
             CoroutineScope(Dispatchers.IO).launch {
-                val starResponse = fetchApiData("http://3.17.36.41:8080/api/closure/star/$number")
+                val starResponse = fetchApiData("http://18.222.115.122:8080/api/closure/star/$number")
 
                 // Actualizar la UI en el hilo principal
                 withContext(Dispatchers.Main) {
@@ -60,7 +60,7 @@ class MainActivity : ComponentActivity() {
 
             // Usar corutina para realizar la llamada de red de forma asíncrona
             CoroutineScope(Dispatchers.IO).launch {
-                val plusResponse = fetchApiData("http://3.17.36.41:8080/api/closure/plus/$number")
+                val plusResponse = fetchApiData("http://18.222.115.122:8080/api/closure/plus/$number")
 
                 // Actualizar la UI en el hilo principal
                 withContext(Dispatchers.Main) {
@@ -77,8 +77,8 @@ class MainActivity : ComponentActivity() {
         bothButton.setOnClickListener {
             val number = numberEditText.text.toString()
             CoroutineScope(Dispatchers.IO).launch {
-                val starResponse = fetchApiData("http://3.17.36.41:8080/api/closure/star/$number")
-                val plusResponse = fetchApiData("http://3.17.36.41:8080/api/closure/plus/$number")
+                val starResponse = fetchApiData("http://18.222.115.122:8080/api/closure/star/$number")
+                val plusResponse = fetchApiData("http://18.222.115.122:8080/api/closure/plus/$number")
 
                 // Update the UI with both responses
                 withContext(Dispatchers.Main) {
