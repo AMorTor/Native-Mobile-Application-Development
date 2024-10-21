@@ -1,22 +1,24 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 
 export default function Signin() {
+  const error = useActionData();
+
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <section className="sm:mx-auto sm:w-full sm:max-w-sm">
         <h1 className="mt-10 text-center text-3xl md:text-4xl font-bold leading-9 tracking-tight text-gray-900">
-          Iniciar sesión
+          Inicio de sesión
         </h1>
       </section>
 
       <section className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <Form action="/signin" className="space-y-6">
+        <Form action="/signin" method="POST" className="space-y-6">
           <div>
             <label
               className="block text-sm font-medium leading-6 text-gray-900 after:content-['*'] after:ml-1 after:text-red-500"
               htmlFor="email"
             >
-              Correo
+              Usuario
             </label>
             <div className="mt-2">
               <input
@@ -24,9 +26,8 @@ export default function Signin() {
                 className="block w-full rounded-md border-0 px-2.5 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                 id="email"
                 name="email"
-                placeholder="Tu correo"
+                placeholder="Tu usuario"
                 required
-                type="email"
               />
             </div>
           </div>
@@ -53,12 +54,14 @@ export default function Signin() {
             </div>
           </div>
 
+          {error && <div className="text-red-500 text-sm">{error}</div>}
+
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="submit"
             >
-              Sign in
+              Iniciar sesión
             </button>
           </div>
         </Form>
