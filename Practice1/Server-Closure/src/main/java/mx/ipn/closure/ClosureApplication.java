@@ -10,9 +10,6 @@ public class ClosureApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(ClosureApplication.class, args);
-        ClosureService closureService = new ClosureService();
-        System.out.println(closureService.generatekleeneStar(3));
-
     }
 
 }
