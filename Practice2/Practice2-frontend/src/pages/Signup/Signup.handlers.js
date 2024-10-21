@@ -1,7 +1,7 @@
 async function signUpAction({ request }) {
   const { email, password } = Object.fromEntries(await request.formData());
 
-  const res = await fetch(`${import.meta.env.BASE_AUTH_URL}/auth/register`, {
+  const res = await fetch(`${import.meta.env.BASE_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
