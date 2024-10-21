@@ -2,14 +2,13 @@ package mx.ipn.crud.Auth;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import mx.ipn.crud.Jwt.JwtService;
 import mx.ipn.crud.User.Role;
 import mx.ipn.crud.User.User;
-import mx.ipn.crud.User.UserRepository;
+import mx.ipn.crud.Repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
