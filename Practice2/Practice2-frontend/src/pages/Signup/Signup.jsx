@@ -1,6 +1,8 @@
-import { Form } from "react-router-dom";
+import { Form, useActionData } from "react-router-dom";
 
 export default function Signup() {
+  const error = useActionData();
+
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <section className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -53,12 +55,14 @@ export default function Signup() {
             </div>
           </div>
 
+          {error && <div className="text-red-500 text-sm">{error}</div>}
+
           <div>
             <button
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               type="submit"
             >
-              Sign in
+              Crear cuenta
             </button>
           </div>
         </Form>
