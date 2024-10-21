@@ -1,5 +1,11 @@
+import { redirect } from "react-router-dom";
+
 async function layoutLoader() {
-  // TODO: Check if the user is logged in
+  const token = localStorage.getItem("token");
+  console.log(token);
+  if (!token) {
+    return redirect("/signin");
+  }
   return null;
 }
 
