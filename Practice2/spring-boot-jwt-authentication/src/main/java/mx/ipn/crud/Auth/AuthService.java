@@ -13,6 +13,9 @@ import mx.ipn.crud.User.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 public class AuthService {
@@ -24,29 +27,35 @@ public class AuthService {
 
     public AuthResponse login(LoginRequest request) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user=userRepository.findByUsername(request.getUsername()).orElseThrow();
-        String token=jwtService.getToken(user);
+        User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        String token = jwtService.getToken(claims, user);
         return AuthResponse.builder()
-            .token(token)
-            .build();
+                .token(token)
+                .build();
 
     }
 
     public AuthResponse register(RegisterRequest request) {
         User user = User.builder()
-            .username(request.getUsername())
-            .last_name(request.lastname)
-            .email(request.email)
-            .password(passwordEncoder.encode( request.getPassword()))
-            .role(Role.USER)
-            .build();
+                .username(request.getUsername())
+                .last_name(request.lastname)
+                .email(request.email)
+                .password(passwordEncoder.encode(request.getPassword()))
+                .role(Role.USER)
+                .build();
 
         userRepository.save(user);
 
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("userId", user.getId());
+        String token = jwtService.getToken(claims, user);
+
         return AuthResponse.builder()
-            .token(jwtService.getToken(user))
-            .build();
-        
+                .token(token)
+                .build();
+
     }
 
 }

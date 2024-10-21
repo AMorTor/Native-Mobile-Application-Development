@@ -3,6 +3,7 @@ package mx.ipn.crud.User;
 import java.util.Collection;
 import java.util.List;
 
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,10 +17,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
@@ -28,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name="users", uniqueConstraints = {@UniqueConstraint(columnNames = {"username"})})
 public class User implements UserDetails {
+    @Getter
     @Id
     @GeneratedValue
     Integer id;
@@ -38,20 +36,20 @@ public class User implements UserDetails {
     String last_name;
     String email;
     String password;
-    @Enumerated(EnumType.STRING) 
+    @Enumerated(EnumType.STRING)
     Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-      return List.of(new SimpleGrantedAuthority((role.name())));
+        return List.of(new SimpleGrantedAuthority((role.name())));
     }
     @Override
     public boolean isAccountNonExpired() {
-       return true;
+        return true;
     }
     @Override
     public boolean isAccountNonLocked() {
-       return true;
+        return true;
     }
     @Override
     public boolean isCredentialsNonExpired() {
