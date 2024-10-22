@@ -11,6 +11,7 @@ import NewUser from "./NewUser/index.js";
 import { newUserAction } from "./NewUser/NewUser.handlers.js";
 import Layout from "../components/Layout/index.js";
 import { layoutLoader } from "../components/Layout/Layout.handlers.js";
+import ErrorBoundary from "../components/Layout/LayoutErrorBoundary.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
     path: "*",
     element: <Layout />,
     loader: layoutLoader,
+    errorElement: <ErrorBoundary />,
     children: [
       {
         path: "",
