@@ -7,8 +7,9 @@ async function userLoader({ params }) {
 
 async function userAction({ params, request }) {
   const { id } = params;
-  const { intent, user_u, user_name, last_name, age, gender, email } =
-    Object.fromEntries(await request.formData());
+  const { intent, username, last_name, email } = Object.fromEntries(
+    await request.formData(),
+  );
 
   if (intent === "update")
     return fetch(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`, {
@@ -17,13 +18,10 @@ async function userAction({ params, request }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id_user: id,
-        user_u,
+        id,
+        username,
         email,
-        user_name,
         last_name,
-        age,
-        gender,
       }),
     });
 

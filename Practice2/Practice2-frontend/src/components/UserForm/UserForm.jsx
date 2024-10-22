@@ -1,41 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useActionData } from "react-router-dom";
 import FormItem from "../FormItem/index.js";
 import Input from "../Input/index.js";
 import Select from "../Select/index.js";
 import Label from "../Label/index.js";
 import PropTypes from "prop-types";
-import { genders, roles } from "../../pages/User/User.constants.js";
+import { roles } from "../../pages/User/User.constants.js";
 
 export default function UserForm({ children, user }) {
+  const error = useActionData();
   return (
     <>
       <FormItem>
         <Label
-          htmlFor="user_u"
+          htmlFor="username"
           className="after:text-red-500 after:ml-1 after:content-['*']"
         >
           Usuario
         </Label>
         <Input
-          id="user_u"
-          name="user_u"
+          id="username"
+          name="username"
           type="text"
-          defaultValue={user?.user_u}
-          required
-        />
-      </FormItem>
-      <FormItem>
-        <Label
-          htmlFor="user_name"
-          className="after:text-red-500 after:ml-1 after:content-['*']"
-        >
-          Nombre
-        </Label>
-        <Input
-          id="user_name"
-          name="user_name"
-          type="text"
-          defaultValue={user?.user_name}
+          defaultValue={user?.username}
           required
         />
       </FormItem>
@@ -63,50 +49,33 @@ export default function UserForm({ children, user }) {
           required
         />
       </FormItem>
-      {user?.rol && (
+      {user?.role === "ADMIN" && (
         <FormItem>
-          <Label htmlFor="rol">Rol</Label>
+          <Label htmlFor="role">Rol</Label>
           <Select
-            id="rol"
-            name="rol"
-            defaultValue={roles.includes(user?.rol) ? user?.rol : ""}
+            id="role"
+            name="role"
+            defaultValue={roles.includes(user?.role) ? user?.role : ""}
+            className="capitalize"
           >
             <option value="" disabled>
               Elige una opción
             </option>
-            {roles.map((rol) => (
-              <option key={rol} value={rol}>
-                {rol}
+            {roles.map((role) => (
+              <option key={role} value={role} className="capitalize">
+                {role.toLowerCase()}
               </option>
             ))}
           </Select>
         </FormItem>
       )}
-      <FormItem>
-        <Label htmlFor="age">Edad</Label>
-        <Input id="age" name="age" type="number" defaultValue={user?.age} />
-      </FormItem>
-      <FormItem>
-        <Label htmlFor="gender">Género</Label>
-        <Select
-          id="gender"
-          name="gender"
-          defaultValue={genders.includes(user?.gender) ? user?.gender : ""}
-        >
-          <option value="" disabled>
-            Elige una opción
-          </option>
-          {genders.map((gender) => (
-            <option key={gender} value={gender}>
-              {gender}
-            </option>
-          ))}
-        </Select>
-      </FormItem>
+      {JSON.stringify(error, null, 2)}
       <div className="flex gap-6 justify-end items-center mt-6">
-        <NavLink to="/" className="text-sm font-semibold">
-          Cancelar
-        </NavLink>
+        {user?.role === "ADMIN" && (
+          <NavLink to="/" className="text-sm font-semibold">
+            Cancelar
+          </NavLink>
+        )}
         {children}
       </div>
     </>
@@ -116,13 +85,10 @@ export default function UserForm({ children, user }) {
 UserForm.propTypes = {
   children: PropTypes.node.isRequired,
   user: PropTypes.shape({
-    id_user: PropTypes.number.isRequired,
-    user_u: PropTypes.string.isRequired,
-    user_name: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
     last_name: PropTypes.string,
     email: PropTypes.string.isRequired,
-    rol: PropTypes.string,
-    age: PropTypes.number,
-    gender: PropTypes.string,
+    role: PropTypes.string,
   }),
 };

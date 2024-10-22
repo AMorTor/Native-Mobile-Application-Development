@@ -1,4 +1,3 @@
-const genders = ["Masculino", "Femenino", "Otro"];
-const roles = ["Usuario", "Administrador"];
+const roles = ["USER", "ADMIN"];
 
-export { genders, roles };
+export { roles };
