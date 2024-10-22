@@ -4,6 +4,7 @@ import Button from "../../components/Button/index.js";
 export default function Home() {
   const users = useLoaderData();
 
+  // TODO: Check user role to show or hide the button
   return (
     <>
       <main>
