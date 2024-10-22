@@ -43,26 +43,28 @@ export default function Home() {
               <tbody>
                 {users.map(
                   ({
-                    id_user,
-                    user_name,
+                    id,
+                    username,
                     last_name,
                     email,
                     user_u,
                     creation_date,
                     age,
                     gender,
-                    rol = "Usuario",
+                    role,
                   }) => (
                     <tr
-                      key={id_user}
+                      key={id}
                       className="text-gray-500 border-b last-of-type:border-b-0"
                     >
-                      <td className="py-4 px-3">{user_name}</td>
+                      <td className="py-4 px-3">{username}</td>
                       <td className="py-4 px-3">{last_name}</td>
                       <td className="py-4 px-3">{email}</td>
-                      <td className="py-4 px-3">{rol}</td>
+                      <td className="py-4 px-3 capitalize">
+                        {role.toLowerCase()}
+                      </td>
                       <td className="py-4 px-3 text-indigo-600 font-semibold">
-                        <NavLink to={`/user/${id_user}`}>Editar</NavLink>
+                        <NavLink to={`/user/${id}`}>Editar</NavLink>
                       </td>
                     </tr>
                   ),
