@@ -1,6 +1,7 @@
 package mx.ipn.crud.Controllers;
 
 
+import mx.ipn.crud.Model.DTO.UserDTO;
 import mx.ipn.crud.Services.UserService;
 import mx.ipn.crud.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +18,12 @@ public class UserController {
     private UserService userService;
 
     @GetMapping({"/", ""})
-    private List<User> findAll() {
+    private List<UserDTO> findAll() {
         return userService.findAll();
     }
 
     @GetMapping({"/{id}", "/{id}/"})
-    private User findById(@PathVariable Long id) {
+    private UserDTO findById(@PathVariable Long id) {
         return userService.findById(id).orElseThrow();
     }
 

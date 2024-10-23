@@ -1,5 +1,6 @@
 package mx.ipn.crud.Services.Impl;
 
+import mx.ipn.crud.Model.DTO.UserDTO;
 import mx.ipn.crud.Repositories.UserRepository;
 import mx.ipn.crud.Services.UserService;
 import mx.ipn.crud.Model.User;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -21,15 +23,17 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
-    public List<User> findAll() {
-        return userRepository.findAll();
+    public List<UserDTO> findAll() {
+        return userRepository.findAll().stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     @Transactional(readOnly = true)
-    public Optional<User> findById(Long id) {
-        return userRepository.findById(Math.toIntExact(id));
+    public Optional<UserDTO> findById(Long id) {
+        return userRepository.findById(Math.toIntExact(id))
+                .map(this::convertToDTO);
     }
-
     @Transactional
     public User save(User user) {
         if (user == null) {
@@ -69,5 +73,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public void deleteById(Long id) {
         userRepository.deleteById(Math.toIntExact(id));
+    }
+
+    private UserDTO convertToDTO(User user) {
+        UserDTO userDTO = new UserDTO();
+        userDTO.setId(user.getId());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setLastname(user.getLastname());
+        userDTO.setEmail(user.getEmail());
+        userDTO.setRole(user.getRole().name());
+        return userDTO;
     }
 }
