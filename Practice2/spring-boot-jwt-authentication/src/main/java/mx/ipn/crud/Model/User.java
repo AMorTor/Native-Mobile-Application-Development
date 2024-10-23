@@ -1,8 +1,9 @@
-package mx.ipn.crud.User;
+package mx.ipn.crud.Model;
 
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,6 +36,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     String last_name;
     String email;
+    @JsonIgnore
     String password;
     @Enumerated(EnumType.STRING)
     Role role;

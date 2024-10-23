@@ -1,6 +1,6 @@
 package mx.ipn.crud.Services;
 
-import mx.ipn.crud.User.User;
+import mx.ipn.crud.Model.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

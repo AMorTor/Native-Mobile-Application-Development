@@ -6,8 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import mx.ipn.crud.Jwt.JwtService;
-import mx.ipn.crud.User.Role;
-import mx.ipn.crud.User.User;
+import mx.ipn.crud.Model.Role;
+import mx.ipn.crud.Model.User;
 import mx.ipn.crud.Repositories.UserRepository;
 
 import lombok.RequiredArgsConstructor;

@@ -3,7 +3,7 @@ package mx.ipn.crud.Services.Impl;
 
 import mx.ipn.crud.Repositories.UserRepository;
 import mx.ipn.crud.Services.UserService;
-import mx.ipn.crud.User.User;
+import mx.ipn.crud.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

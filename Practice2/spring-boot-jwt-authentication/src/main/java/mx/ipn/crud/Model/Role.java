@@ -1,4 +1,4 @@
-package mx.ipn.crud.User;
+package mx.ipn.crud.Model;
 
 public enum Role {
     ADMIN,

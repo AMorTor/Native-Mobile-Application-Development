@@ -2,14 +2,14 @@ package mx.ipn.crud.Controllers;
 
 
 import mx.ipn.crud.Services.UserService;
-import mx.ipn.crud.User.User;
+import mx.ipn.crud.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = {"*"})
 @RestController
+@CrossOrigin(origins = {"*"})
 @RequestMapping("api/users")
 public class UserController {
 
