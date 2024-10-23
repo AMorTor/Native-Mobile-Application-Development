@@ -4,6 +4,7 @@ import mx.ipn.crud.Repositories.UserRepository;
 import mx.ipn.crud.Services.UserService;
 import mx.ipn.crud.Model.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Transactional(readOnly = true)
     public List<User> findAll() {
@@ -57,7 +61,7 @@ public class UserServiceImpl implements UserService {
         userToUpdate.setUsername(user.getUsername());
         userToUpdate.setLastname(user.getLastname());
         userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
         userToUpdate.setRole(user.getRole());
         return userRepository.save(userToUpdate);
     }
