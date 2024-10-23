@@ -25,7 +25,8 @@ public class AuthService {
     private final AuthenticationManager authenticationManager;
 
     public AuthResponse login(LoginRequest request) {
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
+        authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
         User user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         Map<String, Object> claims = new HashMap<>();
         claims.put("userId", user.getId());
@@ -39,7 +40,7 @@ public class AuthService {
     public AuthResponse register(RegisterRequest request) {
         User user = User.builder()
                 .username(request.getUsername())
-                .last_name(request.lastname)
+                .lastname(request.lastname)
                 .email(request.email)
                 .password(passwordEncoder.encode(request.getPassword()))
                 .role(Role.USER)

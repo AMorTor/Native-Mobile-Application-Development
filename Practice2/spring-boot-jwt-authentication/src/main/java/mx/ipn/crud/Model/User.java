@@ -24,21 +24,28 @@ import jakarta.persistence.UniqueConstraint;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = { "username" }) })
 public class User implements UserDetails {
-    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
+
     @Basic
-    @Column(nullable = false)
+    @Column(name = "username", nullable = false)
     String username;
-    @Column(nullable = false)
-    String last_name;
+
+    @Column(name = "lastname", nullable = false)
+    String lastname;
+
+    @Column(name = "email", nullable = false)
     String email;
-    @JsonIgnore
+
+    @Column(name = "password", nullable = false)
     String password;
+
     @Enumerated(EnumType.STRING)
     Role role;
 

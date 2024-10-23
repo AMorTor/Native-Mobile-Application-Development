@@ -1,6 +1,5 @@
 package mx.ipn.crud.Services.Impl;
 
-
 import mx.ipn.crud.Repositories.UserRepository;
 import mx.ipn.crud.Services.UserService;
 import mx.ipn.crud.Model.User;
@@ -37,7 +36,7 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Username must not be empty");
         }
 
-        if (user.getLast_name() == null || user.getLast_name().isEmpty()) {
+        if (user.getLastname() == null || user.getLastname().isEmpty()) {
             throw new IllegalArgumentException("Last name must not be empty");
         }
 
@@ -56,9 +55,10 @@ public class UserServiceImpl implements UserService {
     public User update(Long id, User user) {
         User userToUpdate = userRepository.findById(Math.toIntExact(id)).orElseThrow();
         userToUpdate.setUsername(user.getUsername());
-        userToUpdate.setLast_name(user.getLast_name());
+        userToUpdate.setLastname(user.getLastname());
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setRole(user.getRole());
         return userRepository.save(userToUpdate);
     }
 
