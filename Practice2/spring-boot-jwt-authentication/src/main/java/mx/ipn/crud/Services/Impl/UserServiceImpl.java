@@ -56,17 +56,34 @@ public class UserServiceImpl implements UserService {
             throw new IllegalArgumentException("Password must not be empty");
         }
 
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
     @Transactional
     public User update(Long id, User user) {
         User userToUpdate = userRepository.findById(Math.toIntExact(id)).orElseThrow();
-        userToUpdate.setUsername(user.getUsername());
-        userToUpdate.setLastname(user.getLastname());
-        userToUpdate.setEmail(user.getEmail());
-        userToUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
-        userToUpdate.setRole(user.getRole());
+
+        if (user.getUsername() != null && !user.getUsername().isEmpty()) {
+            userToUpdate.setUsername(user.getUsername());
+        }
+
+        if (user.getLastname() != null && !user.getLastname().isEmpty()) {
+            userToUpdate.setLastname(user.getLastname());
+        }
+
+        if (user.getEmail() != null && !user.getEmail().isEmpty()) {
+            userToUpdate.setEmail(user.getEmail());
+        }
+
+        if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+            userToUpdate.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
+        if (user.getRole() != null) {
+            userToUpdate.setRole(user.getRole());
+        }
+
         return userRepository.save(userToUpdate);
     }
 
