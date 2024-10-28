@@ -1,5 +1,4 @@
 import { useLoaderData } from "react-router-dom";
-import Layout from "../../components/Layout/index.js";
 import UserDeleteDialog from "./UserDeleteDialog.jsx";
 import UserUpdateForm from "./UserUpdateForm.jsx";
 
@@ -16,7 +15,7 @@ export default function User() {
             información
           </p>
         </div>
-        <UserDeleteDialog userID={user.id_user} />
+        <UserDeleteDialog userID={user.id} />
       </section>
       <UserUpdateForm user={user} />
     </>

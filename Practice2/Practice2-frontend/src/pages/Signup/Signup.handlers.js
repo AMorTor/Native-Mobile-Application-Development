@@ -1,22 +1,29 @@
-async function signUpAction({ request }) {
-  const { email, password } = Object.fromEntries(await request.formData());
+import { saveUserToLocalstorage } from "../../utils/saveUserToLocalstorage.js";
+import { redirect } from "react-router-dom";
 
-  const res = await fetch(`${import.meta.env.BASE_URL}/auth/register`, {
+async function signUpAction({ request }) {
+  const { email, username, lastname, password } = Object.fromEntries(
+    await request.formData(),
+  );
+
+  const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       email,
-      username: crypto.randomUUID(),
-      lastname: crypto.randomUUID(),
+      username,
+      lastname,
       password,
-      roles: "USER",
     }),
   });
 
   if (!res.ok) {
     console.log({ error: res.statusText });
   }
-  return res;
+
+  const { token } = await res.json();
+  await saveUserToLocalstorage(token);
+  return redirect("/");
 }
 
 export { signUpAction };

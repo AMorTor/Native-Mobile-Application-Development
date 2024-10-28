@@ -7,7 +7,7 @@ async function userLoader({ params }) {
 
 async function userAction({ params, request }) {
   const { id } = params;
-  const { intent, username, last_name, email } = Object.fromEntries(
+  const { intent, username, lastname, email } = Object.fromEntries(
     await request.formData(),
   );
 
@@ -21,7 +21,7 @@ async function userAction({ params, request }) {
         id,
         username,
         email,
-        last_name,
+        lastname,
       }),
     });
 
@@ -41,7 +41,10 @@ async function userAction({ params, request }) {
       throw new Error("No se pudo eliminar el usuario");
     }
 
-    return redirect("/");
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+
+    return redirect("/signin");
   }
 }
 

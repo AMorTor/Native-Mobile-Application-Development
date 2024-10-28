@@ -18,11 +18,13 @@ export const router = createBrowserRouter([
     path: "/signup",
     element: <Signup />,
     action: signUpAction,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "/signin",
     element: <Signin />,
     action: signInAction,
+    errorElement: <ErrorBoundary />,
   },
   {
     path: "*",
