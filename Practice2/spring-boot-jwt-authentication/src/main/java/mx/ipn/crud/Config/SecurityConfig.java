@@ -2,6 +2,7 @@ package mx.ipn.crud.Config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,9 +31,11 @@ public class SecurityConfig {
                 .disable())
             .authorizeHttpRequests(authRequest ->
               authRequest
-                .requestMatchers("/auth/**").permitAll()
-                .requestMatchers("/api/users/**").permitAll()
-                .anyRequest().authenticated()
+                      .requestMatchers(HttpMethod.GET).permitAll()
+                      .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                      .requestMatchers("/auth/**").permitAll()
+                      .requestMatchers("/api/users/**").permitAll()
+                      .anyRequest().authenticated()
                 )
             .sessionManagement(sessionManager->
                 sessionManager
