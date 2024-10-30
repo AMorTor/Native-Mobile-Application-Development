@@ -7,7 +7,6 @@ async function signInAction({ request }) {
   const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/login`, {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({

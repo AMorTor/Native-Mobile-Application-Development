@@ -9,7 +9,6 @@ async function signUpAction({ request }) {
   const res = await fetch(`${import.meta.env.VITE_BASE_URL}/auth/register`, {
     method: "POST",
     headers: {
-      "Access-Control-Allow-Origin": "*",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
@@ -21,7 +20,9 @@ async function signUpAction({ request }) {
   });
 
   if (!res.ok) {
-    console.log({ error: res.statusText });
+    const errorText = await res.text();
+    console.log({ error: errorText });
+    return;
   }
 
   const { token } = await res.json();
