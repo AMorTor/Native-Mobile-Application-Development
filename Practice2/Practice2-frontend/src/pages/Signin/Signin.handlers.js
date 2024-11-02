@@ -14,7 +14,7 @@ async function signInAction({ request }) {
   });
 
   if (!res.ok) {
-    return res.statusText;
+    return "Usuario o contraseña incorrectos";
   }
 
   const { token } = await res.json();

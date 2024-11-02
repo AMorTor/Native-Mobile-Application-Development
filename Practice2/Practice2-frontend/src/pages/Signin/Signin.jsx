@@ -2,6 +2,7 @@ import { Form, useActionData } from "react-router-dom";
 
 export default function Signin() {
   const error = useActionData();
+  console.log({ error });
 
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -12,7 +13,7 @@ export default function Signin() {
       </section>
 
       <section className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-        <Form action="/signin" method="POST" className="space-y-6">
+        <Form action="/signin" method="POST" className="flex flex-col gap-6">
           <div>
             <label
               className="block text-sm font-medium leading-6 text-gray-900 after:content-['*'] after:ml-1 after:text-red-500"
@@ -53,8 +54,7 @@ export default function Signin() {
               />
             </div>
           </div>
-
-          {error && <div className="text-red-500 text-sm">{error}</div>}
+          {error && <div className="text-red-500 text-sm -mt-4">{error}</div>}
 
           <div>
             <button
