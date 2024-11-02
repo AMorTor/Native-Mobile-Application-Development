@@ -41,10 +41,14 @@ async function userAction({ params, request }) {
       throw new Error("No se pudo eliminar el usuario");
     }
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("userId");
+    if (id === localStorage.getItem("userId")) {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userId");
 
-    return redirect("/signin");
+      return redirect("/signin");
+    }
+
+    return redirect("/");
   }
 }
 
