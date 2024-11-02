@@ -8,6 +8,7 @@ import { homeLoader } from "./Home/Home.handlers.js";
 import User from "./User/index.js";
 import { userAction, userLoader } from "./User/User.handlers.js";
 import NewUser from "./NewUser/index.js";
+import { newUserLoader } from "../components/UserForm/UserForm.handlers.js";
 import { newUserAction } from "./NewUser/NewUser.handlers.js";
 import Layout from "../components/Layout/index.js";
 import { layoutLoader } from "../components/Layout/Layout.handlers.js";
@@ -40,6 +41,7 @@ export const router = createBrowserRouter([
       {
         path: "user",
         element: <NewUser />,
+        loader: newUserLoader,
         action: newUserAction,
       },
       {
