@@ -7,7 +7,7 @@ async function userLoader({ params }) {
 
 async function userAction({ params, request }) {
   const { id } = params;
-  const { intent, username, lastname, email } = Object.fromEntries(
+  const { intent, username, lastname, email, password } = Object.fromEntries(
     await request.formData(),
   );
 
@@ -22,6 +22,7 @@ async function userAction({ params, request }) {
         username,
         email,
         lastname,
+        password,
       }),
     });
 
