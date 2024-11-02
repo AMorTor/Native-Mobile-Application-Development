@@ -1,12 +1,14 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLoaderData } from "react-router-dom";
+import { roles } from "../../pages/User/User.constants.js";
 import FormItem from "../FormItem/index.js";
 import Input from "../Input/index.js";
 import Select from "../Select/index.js";
 import Label from "../Label/index.js";
 import PropTypes from "prop-types";
-import { roles } from "../../pages/User/User.constants.js";
 
 export default function UserForm({ children, user }) {
+  const role = useLoaderData();
+
   return (
     <>
       <FormItem>
@@ -25,15 +27,6 @@ export default function UserForm({ children, user }) {
         />
       </FormItem>
       <FormItem>
-        <Label htmlFor="lastname">Apellido</Label>
-        <Input
-          id="lastname"
-          name="lastname"
-          type="text"
-          defaultValue={user?.lastname}
-        />
-      </FormItem>
-      <FormItem>
         <Label
           htmlFor="email"
           className="after:text-red-500 after:ml-1 after:content-['*']"
@@ -48,13 +41,28 @@ export default function UserForm({ children, user }) {
           required
         />
       </FormItem>
-      {user?.role === "ADMIN" && (
+      <FormItem>
+        <Label htmlFor="lastname">Apellido</Label>
+        <Input
+          id="lastname"
+          name="lastname"
+          type="text"
+          defaultValue={user?.lastname}
+        />
+      </FormItem>
+      <FormItem>
+        <Label htmlFor="password" className="after:text-red-500 after:ml-1">
+          Contraseña
+        </Label>
+        <Input id="password" name="password" type="password" />
+      </FormItem>
+      {role === "ADMIN" && (
         <FormItem>
           <Label htmlFor="role">Rol</Label>
           <Select
             id="role"
             name="role"
-            defaultValue={roles.includes(user?.role) ? user?.role : ""}
+            defaultValue={roles.includes(role) ? role : ""}
             className="capitalize"
           >
             <option value="" disabled>
@@ -69,7 +77,7 @@ export default function UserForm({ children, user }) {
         </FormItem>
       )}
       <div className="flex gap-6 justify-end items-center mt-6">
-        {user?.role === "ADMIN" && (
+        {role === "ADMIN" && (
           <NavLink to="/" className="text-sm font-semibold">
             Cancelar
           </NavLink>
