@@ -42,34 +42,22 @@ export default function Home() {
                 </tr>
               </thead>
               <tbody>
-                {users.map(
-                  ({
-                    id,
-                    username,
-                    last_name,
-                    email,
-                    user_u,
-                    creation_date,
-                    age,
-                    gender,
-                    role,
-                  }) => (
-                    <tr
-                      key={id}
-                      className="text-gray-500 border-b last-of-type:border-b-0"
-                    >
-                      <td className="py-4 px-3">{username}</td>
-                      <td className="py-4 px-3">{last_name}</td>
-                      <td className="py-4 px-3">{email}</td>
-                      <td className="py-4 px-3 capitalize">
-                        {role.toLowerCase()}
-                      </td>
-                      <td className="py-4 px-3 text-indigo-600 font-semibold">
-                        <NavLink to={`/user/${id}`}>Editar</NavLink>
-                      </td>
-                    </tr>
-                  ),
-                )}
+                {users.map(({ id, username, lastname, email, role }) => (
+                  <tr
+                    key={id}
+                    className="text-gray-500 border-b last-of-type:border-b-0"
+                  >
+                    <td className="py-4 px-3">{username}</td>
+                    <td className="py-4 px-3">{lastname}</td>
+                    <td className="py-4 px-3">{email}</td>
+                    <td className="py-4 px-3 capitalize">
+                      {role.toLowerCase()}
+                    </td>
+                    <td className="py-4 px-3 text-indigo-600 font-semibold">
+                      <NavLink to={`/user/${id}`}>Editar</NavLink>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </table>
           )}
