@@ -11,20 +11,28 @@ async function userAction({ params, request }) {
     await request.formData(),
   );
 
-  if (intent === "update")
-    return fetch(`${import.meta.env.VITE_BASE_URL}/api/users/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
+  if (intent === "update") {
+    const res = await fetch(
+      `${import.meta.env.VITE_BASE_URL}/api/users/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id,
+          username,
+          email,
+          lastname,
+          password,
+        }),
       },
-      body: JSON.stringify({
-        id,
-        username,
-        email,
-        lastname,
-        password,
-      }),
-    });
+    );
+    if (!res.ok) {
+      return { status: "error", message: "No se pudo actualizar el usuario" };
+    }
+    return { status: "success", message: "Usuario actualizado correctamente" };
+  }
 
   if (intent === "delete") {
     const res = await fetch(
@@ -38,8 +46,7 @@ async function userAction({ params, request }) {
     );
 
     if (!res.ok) {
-      console.log(res.status, res.statusText);
-      throw new Error("No se pudo eliminar el usuario");
+      return { status: "error", message: "No se pudo eliminar el usuario" };
     }
 
     if (id === localStorage.getItem("userId")) {

@@ -2,7 +2,6 @@ import { Form, useActionData } from "react-router-dom";
 
 export default function Signin() {
   const error = useActionData();
-  console.log({ error });
 
   return (
     <main className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
